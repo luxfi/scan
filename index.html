@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LuxScan - Lux Network Block Explorer</title>
     <meta name="description" content="Explore blocks, transactions, and addresses on the Lux Network. Real-time blockchain data and analytics.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%238b5cf6'/%3E%3Cpath d='M10 20l6-12 6 12' stroke='%2306b6d4' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ffffff'/%3E%3Cpath d='M10 20l6-12 6 12' stroke='%23000000' stroke-width='2' fill='none'/%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -14,25 +14,32 @@
         }
 
         :root {
-            --purple: #8b5cf6;
-            --purple-dark: #7c3aed;
-            --cyan: #06b6d4;
-            --cyan-dark: #0891b2;
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-tertiary: #1a1a24;
-            --border: #2a2a3a;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --success: #22c55e;
-            --warning: #f59e0b;
+            --background: 0 0% 3.9%;
+            --foreground: 0 0% 98%;
+            --card: 0 0% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --popover: 0 0% 3.9%;
+            --popover-foreground: 0 0% 98%;
+            --primary: 0 0% 98%;
+            --primary-foreground: 0 0% 9%;
+            --secondary: 0 0% 14.9%;
+            --secondary-foreground: 0 0% 98%;
+            --muted: 0 0% 14.9%;
+            --muted-foreground: 0 0% 63.9%;
+            --accent: 0 0% 14.9%;
+            --accent-foreground: 0 0% 98%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 0 0% 98%;
+            --border: 0 0% 14.9%;
+            --input: 0 0% 14.9%;
+            --ring: 0 0% 83.1%;
+            --radius: 0.5rem;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
             line-height: 1.6;
             min-height: 100vh;
         }
@@ -44,8 +51,8 @@
 
         /* Header */
         header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
+            background: hsl(var(--card));
+            border-bottom: 1px solid hsl(var(--border));
             position: sticky;
             top: 0;
             z-index: 100;
@@ -74,10 +81,7 @@
         }
 
         .logo span {
-            background: linear-gradient(135deg, var(--purple), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: hsl(var(--foreground));
         }
 
         nav {
@@ -87,46 +91,47 @@
         }
 
         nav a {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+            font-size: 0.875rem;
             transition: color 0.2s;
         }
 
         nav a:hover {
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
         }
 
         .network-selector {
             display: flex;
-            background: var(--bg-tertiary);
-            border-radius: 8px;
+            background: hsl(var(--secondary));
+            border-radius: var(--radius);
             padding: 4px;
             gap: 4px;
         }
 
         .network-btn {
             padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
             cursor: pointer;
             border: none;
             background: transparent;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             transition: all 0.2s;
         }
 
         .network-btn.active {
-            background: var(--purple);
-            color: white;
+            background: hsl(var(--foreground));
+            color: hsl(var(--background));
         }
 
         .network-btn:hover:not(.active) {
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            background: hsl(var(--card));
+            border-bottom: 1px solid hsl(var(--border));
             padding: 4rem 2rem;
             text-align: center;
         }
@@ -135,18 +140,12 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--purple), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: hsl(var(--foreground));
         }
 
         .hero p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+            color: hsl(var(--muted-foreground));
+            font-size: 1.125rem;
             margin-bottom: 2rem;
         }
 
@@ -158,26 +157,26 @@
 
         .search-bar {
             display: flex;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: hsl(var(--background));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             overflow: hidden;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .search-bar:focus-within {
-            border-color: var(--purple);
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            border-color: hsl(var(--ring));
+            box-shadow: 0 0 0 2px hsla(var(--ring), 0.2);
         }
 
         .search-select {
-            background: var(--bg-secondary);
+            background: hsl(var(--secondary));
             border: none;
             padding: 1rem 1.25rem;
-            color: var(--text-primary);
-            font-size: 0.9rem;
+            color: hsl(var(--foreground));
+            font-size: 0.875rem;
             cursor: pointer;
-            border-right: 1px solid var(--border);
+            border-right: 1px solid hsl(var(--border));
         }
 
         .search-input {
@@ -185,20 +184,20 @@
             background: transparent;
             border: none;
             padding: 1rem 1.25rem;
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
             font-size: 1rem;
             outline: none;
         }
 
         .search-input::placeholder {
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
         }
 
         .search-btn {
-            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            background: hsl(var(--foreground));
             border: none;
             padding: 1rem 2rem;
-            color: white;
+            color: hsl(var(--background));
             font-weight: 600;
             cursor: pointer;
             transition: opacity 0.2s;
@@ -223,8 +222,8 @@
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 0.25rem;
@@ -234,6 +233,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            color: hsl(var(--foreground));
         }
 
         .stat-value.pulse {
@@ -247,7 +247,7 @@
 
         .stat-change {
             font-size: 0.75rem;
-            color: var(--success);
+            color: hsl(var(--muted-foreground));
         }
 
         /* Main Content */
@@ -278,15 +278,15 @@
         }
 
         .stat-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             padding: 1.5rem;
             transition: border-color 0.2s;
         }
 
         .stat-card:hover {
-            border-color: var(--purple);
+            border-color: hsl(var(--ring));
         }
 
         .stat-card-header {
@@ -299,38 +299,31 @@
         .stat-card-icon {
             width: 40px;
             height: 40px;
-            border-radius: 10px;
+            border-radius: calc(var(--radius) - 2px);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.25rem;
-        }
-
-        .stat-card-icon.purple {
-            background: rgba(139, 92, 246, 0.15);
-            color: var(--purple);
-        }
-
-        .stat-card-icon.cyan {
-            background: rgba(6, 182, 212, 0.15);
-            color: var(--cyan);
+            background: hsl(var(--secondary));
+            color: hsl(var(--foreground));
         }
 
         .stat-card-title {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
         }
 
         .stat-card-value {
             font-size: 1.75rem;
             font-weight: 700;
             font-family: 'SF Mono', Monaco, monospace;
+            color: hsl(var(--foreground));
             margin-bottom: 0.25rem;
         }
 
         .stat-card-sub {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
         }
 
         /* Tables Section */
@@ -347,9 +340,9 @@
         }
 
         .table-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             overflow: hidden;
         }
 
@@ -358,7 +351,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid hsl(var(--border));
         }
 
         .table-title {
@@ -366,24 +359,25 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 600;
+            color: hsl(var(--foreground));
         }
 
         .table-title svg {
             width: 20px;
             height: 20px;
-            color: var(--purple);
+            color: hsl(var(--foreground));
         }
 
         .view-all {
-            font-size: 0.85rem;
-            color: var(--cyan);
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
             display: flex;
             align-items: center;
             gap: 0.25rem;
         }
 
         .view-all:hover {
-            text-decoration: underline;
+            color: hsl(var(--foreground));
         }
 
         .table-body {
@@ -394,25 +388,26 @@
             display: flex;
             align-items: center;
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: calc(var(--radius) - 2px);
             transition: background 0.2s;
         }
 
         .table-row:hover {
-            background: var(--bg-tertiary);
+            background: hsl(var(--secondary));
         }
 
         .row-icon {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
-            background: var(--bg-tertiary);
+            border-radius: calc(var(--radius) - 2px);
+            background: hsl(var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--muted-foreground));
         }
 
         .row-main {
@@ -422,14 +417,14 @@
 
         .row-primary {
             font-family: 'SF Mono', Monaco, monospace;
-            font-size: 0.9rem;
-            color: var(--cyan);
+            font-size: 0.875rem;
+            color: hsl(var(--foreground));
             margin-bottom: 0.25rem;
         }
 
         .row-secondary {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
         }
 
         .row-right {
@@ -438,38 +433,39 @@
 
         .row-amount {
             font-family: 'SF Mono', Monaco, monospace;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            color: hsl(var(--foreground));
             margin-bottom: 0.25rem;
         }
 
         .row-time {
             font-size: 0.75rem;
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
         }
 
         .badge {
             display: inline-block;
             padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.625rem;
             font-weight: 600;
             text-transform: uppercase;
         }
 
         .badge-success {
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--success);
+            background: hsl(var(--secondary));
+            color: hsl(var(--foreground));
         }
 
         .badge-pending {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--warning);
+            background: hsl(var(--secondary));
+            color: hsl(var(--muted-foreground));
         }
 
         /* Footer */
         footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
+            background: hsl(var(--card));
+            border-top: 1px solid hsl(var(--border));
             margin-top: 4rem;
             padding: 3rem 2rem;
         }
@@ -499,18 +495,18 @@
         }
 
         .footer-brand p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+            font-size: 0.875rem;
             margin-top: 1rem;
         }
 
         .footer-column h4 {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 1rem;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
         }
 
         .footer-column ul {
@@ -522,25 +518,25 @@
         }
 
         .footer-column a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+            font-size: 0.875rem;
             transition: color 0.2s;
         }
 
         .footer-column a:hover {
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
         }
 
         .footer-bottom {
             max-width: 1400px;
             margin: 2rem auto 0;
             padding-top: 2rem;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid hsl(var(--border));
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            color: hsl(var(--muted-foreground));
+            font-size: 0.875rem;
         }
 
         .footer-socials {
@@ -549,12 +545,12 @@
         }
 
         .footer-socials a {
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
             transition: color 0.2s;
         }
 
         .footer-socials a:hover {
-            color: var(--purple);
+            color: hsl(var(--foreground));
         }
 
         /* Mobile Nav */
@@ -571,7 +567,7 @@
                 display: block;
                 background: transparent;
                 border: none;
-                color: var(--text-primary);
+                color: hsl(var(--foreground));
                 font-size: 1.5rem;
                 cursor: pointer;
             }
@@ -600,14 +596,8 @@
         <div class="header-content">
             <a href="/" class="logo">
                 <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="16" cy="16" r="14" fill="url(#logo-gradient)"/>
-                    <path d="M10 20L16 8L22 20" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    <defs>
-                        <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32">
-                            <stop offset="0%" stop-color="#8b5cf6"/>
-                            <stop offset="100%" stop-color="#7c3aed"/>
-                        </linearGradient>
-                    </defs>
+                    <circle cx="16" cy="16" r="14" fill="white"/>
+                    <path d="M10 20L16 8L22 20" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
                 <span>LuxScan</span>
             </a>
@@ -631,7 +621,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Explore the <span>Lux Network</span></h1>
+        <h1>Explore the Lux Network</h1>
         <p>Search for blocks, transactions, addresses, and more on the Lux blockchain</p>
 
         <div class="search-container">
@@ -675,7 +665,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-card-icon purple">&#9632;</div>
+                    <div class="stat-card-icon">&#9632;</div>
                     <div class="stat-card-title">Total Blocks</div>
                 </div>
                 <div class="stat-card-value">18,472,651</div>
@@ -684,7 +674,7 @@
 
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-card-icon cyan">&#8644;</div>
+                    <div class="stat-card-icon">&#8644;</div>
                     <div class="stat-card-title">Total Transactions</div>
                 </div>
                 <div class="stat-card-value">2,418,293,847</div>
@@ -693,7 +683,7 @@
 
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-card-icon purple">&#9673;</div>
+                    <div class="stat-card-icon">&#9673;</div>
                     <div class="stat-card-title">Market Cap</div>
                 </div>
                 <div class="stat-card-value">$847.2M</div>
@@ -702,7 +692,7 @@
 
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-card-icon cyan">&#9733;</div>
+                    <div class="stat-card-icon">&#9733;</div>
                     <div class="stat-card-title">Total Staked</div>
                 </div>
                 <div class="stat-card-value">142.8M LUX</div>
@@ -863,14 +853,8 @@
             <div class="footer-brand">
                 <div class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-                        <circle cx="16" cy="16" r="14" fill="url(#logo-gradient-footer)"/>
-                        <path d="M10 20L16 8L22 20" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <defs>
-                            <linearGradient id="logo-gradient-footer" x1="0" y1="0" x2="32" y2="32">
-                                <stop offset="0%" stop-color="#8b5cf6"/>
-                                <stop offset="100%" stop-color="#7c3aed"/>
-                            </linearGradient>
-                        </defs>
+                        <circle cx="16" cy="16" r="14" fill="white"/>
+                        <path d="M10 20L16 8L22 20" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                     </svg>
                     <span>LuxScan</span>
                 </div>
